@@ -7,7 +7,15 @@ import dayjs from "dayjs";
 
 type Data = any;
 
-const memCache: any = {};
+import { LRUCache } from "lru-cache";
+
+const memCache = new LRUCache({
+  max: 500,
+  ttl: 1000 * 60 * 5,
+  allowStale: false,
+  updateAgeOnGet: false,
+  updateAgeOnHas: false,
+});
 
 // @ts-ignore
 async function fetcherTicker(
@@ -34,7 +42,7 @@ export default async function handler(
   try {
     const { token, theme } = req.query;
     const key = `${token}-${dayjs().format("YYYY-MM-DD-HH-mm")}-${theme}`;
-    if (!memCache[key]) {
+    if (!memCache.get(key)) {
       const tokenData = await fetcherTicker(token as string, "7", "usd");
       const img = await renderCompactTokenChart({
         // @ts-ignore
@@ -47,15 +55,15 @@ export default async function handler(
         symbol: tokenData.base_coin.symbol,
         image: tokenData.base_coin.image?.small,
       });
-      memCache[key] = img;
+      memCache.set(key, img);
     }
 
     res
       .writeHead(200, {
         "content-type": "image/png",
-        "Content-Length": memCache[key].length,
+        "Content-Length": (memCache.get(key) as Buffer)?.length! || 0,
       })
-      .end(memCache[key]);
+      .end(memCache.get(key));
   } catch (error: any) {
     console.error(error);
     res.status(500).json({ error: error.message });

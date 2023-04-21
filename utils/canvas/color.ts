@@ -5,34 +5,34 @@ export function getChartColorConfig(id?: string) {
   switch (id) {
     case "bitcoin":
       borderColor = "#ffa301";
-      gradientFrom = "rgba(159,110,43,0.4)";
-      gradientTo = "rgba(76,66,52,0.02)";
+      gradientFrom = "rgba(159,110,43,0.9)";
+      gradientTo = "rgba(76,66,52,0.4)";
       break;
     case "ethereum":
     case "ethereum-pow-iou":
       borderColor = "#a996f2";
-      gradientFrom = "rgba(108,136,217,0.4)";
-      gradientTo = "rgba(74,93,148,0.02)";
+      gradientFrom = "rgba(108,136,217,0.9)";
+      gradientTo = "rgba(74,93,148,0.4)";
       break;
     case "tether":
       borderColor = "#22a07a";
-      gradientFrom = "rgba(46,78,71,0.4)";
-      gradientTo = "rgba(48,63,63,0.02)";
+      gradientFrom = "rgba(46,78,71,0.9)";
+      gradientTo = "rgba(48,63,63,0.4)";
       break;
     case "binancecoin" || "terra":
       borderColor = "#f5bc00";
-      gradientFrom = "rgba(172,136,41,0.4)";
-      gradientTo = "rgba(73,67,55,0.02)";
+      gradientFrom = "rgba(172,136,41,0.9)";
+      gradientTo = "rgba(73,67,55,0.4)";
       break;
     case "solana":
       borderColor = "#9945ff";
-      gradientFrom = "rgba(116,62,184,0.4)";
-      gradientTo = "rgba(61,53,83,0.02)";
+      gradientFrom = "rgba(116,62,184,0.9)";
+      gradientTo = "rgba(61,53,83,0.4)";
       break;
     default:
       borderColor = "#009cdb";
-      gradientFrom = "rgba(53,83,192,0.4)";
-      gradientTo = "rgba(58,69,110,0.02)";
+      gradientFrom = "rgba(53,83,192,0.9)";
+      gradientTo = "rgba(58,69,110,0.4)";
   }
 
   return {
